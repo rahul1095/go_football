@@ -18,5 +18,87 @@
   <% end %>
     <div class="container">
     <%= yield %>
+
+
+
+    <% if current_user %>
+      <div class="container">
+        <div class=row>
+          <div class="col-md-2 pull-right" >
+            <div class="panel panel-primary">
+              <div class="panel-heading">
+                <h3 class="panel-title">People online<span class="glyphicon glyphicon-minus-sign minus-sign" style="float: right"></span><span class="glyphicon glyphicon-plus-sign plus-sign" style="float: right; display:none;"></span></h3>
+
+
+              </div>
+              <div class="panel-body" style="height:300px;overflow:auto;">
+                <%@users = User.all.where.not(id: current_user).where('username is not null')%>
+                <ul>
+                 <% @users.each do |user| %>
+
+                    <% if user.online?%>
+                      <div class="" style="float: right;
+                        line-height: 20px;
+                        margin: 0 1px 0 4px;
+                        text-align: right">
+                       <span style="background: rgb(66, 183, 42); border-radius: 50%; display: inline-block; height: 6px; margin-left: 4px; width: 6px;"></span>
+                      </div>
+                      <a href="/conversations?user_id=<%=user.id %>" data-remote=true data-method= post>
+
+
+                      <span style="overflow: hidden;padding-left:8px;
+                      text-overflow: ellipsis;
+
+                      white-space: nowrap;"> <%= user.fullname.split.first%>
+                       <p>Online</p>
+                      </span><hr/>
+                      </a>
+
+                     <% else %>
+                     <span style="color: #fff; border-radius: 50%; display: inline-block; height: 6px; margin-left: 4px; width: 6px; float: right; "></span>
+                      <a href="/conversations?user_id=<%=user.id %>" data-remote=true data-method= post>
+
+
+                      <span style="overflow: hidden;padding-left:8px;
+                      text-overflow: ellipsis;
+
+                      white-space: nowrap;"><%= user.fullname.split.first%><%total_secand=Time.now-(user.last_sign_out_at)%>
+                      <%seconds = total_secand % 60%>
+                      <%hours=total_secand/(60 * 60)%>
+                      <%minutes = ((total_secand / 60)%60) %>
+                      <p> Last seen &nbsp;<%=format("%02d", hours)%>h
+                      <%=format("%02d", minutes)%>m
+                       <%=format("%02d", seconds)%>s ago</p>
+                    
+                      
+                     </a>
+                    <% end %>
+                 <% end %>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+
+      <div class="">
+
+        <div id="conversations-list">
+          <%session[:conversations] ||= []%>
+         <% @conversations = Conversation.includes(:recipient, :messages)
+          .find(session[:conversations])%>
+         <% @conversations.each do |conversation| %>
+          <%= render 'conversations/conversation', conversation: conversation, user: current_user%>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
   </body>
 </html>
+
+<style>
+p {
+    font-size: 10px;
+}
+</style>

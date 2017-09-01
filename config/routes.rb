@@ -3,7 +3,8 @@ Rails.application.routes.draw do
 
     # root 'welcome#index'
     root 'home#index'
-  devise_for :users
+  devise_for :users, :controllers => { sessions: 'sessions' }
+  
   resources :conversations, only: [:create] do
 
    member do
