@@ -1,7 +1,8 @@
 class User < ApplicationRecord
-	 mount_uploader :image, ImageUploader
+	 # mount_uploader :image, ImageUploader
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
+   mount_uploader :image, AvatarUploader
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
          has_many :messages
@@ -19,5 +20,16 @@ class User < ApplicationRecord
 
 def self.find_for_database_authentication(conditions={})
   find_by(username: conditions[:email]) || find_by(email: conditions[:email])
+end
+
+
+def filename
+  if original_filename
+    if model && model.read_attribute(:image).present? #or whatever you call your column
+      model.read_attribute(:image)
+    else
+      # create new filename however you're doing it
+    end
+  end
 end
 end

@@ -31,11 +31,10 @@
 
 
               </div>
-              <div class="panel-body" style="height:300px;overflow:auto;">
+              <div class="panel-body" style="height:300px; overflow:auto;">
                 <%@users = User.all.where.not(id: current_user).where('username is not null')%>
                 <ul>
                  <% @users.each do |user| %>
-
                     <% if user.online?%>
                       <div class="" style="float: right;
                         line-height: 20px;
@@ -48,8 +47,13 @@
 
                       <span style="overflow: hidden;padding-left:8px;
                       text-overflow: ellipsis;
-
-                      white-space: nowrap;"> <%= user.fullname.split.first%>
+                      white-space: nowrap;">
+                      <%if user.image.url(:small_thumb).present? %>
+                     <%= image_tag user.image.url(:small_thumb)%>
+                      <%else%>
+                      <%=image_tag 'pic.png', :class=>"img-circle",:alt=>"Cinque Terre",:width=>"30" ,:height=>"30" %>
+                      <%end%>&nbsp;&nbsp;&nbsp;
+                      <%= user.fullname.split.first%>
                        <p>Online</p>
                       </span><hr/>
                       </a>
@@ -62,15 +66,19 @@
                       <span style="overflow: hidden;padding-left:8px;
                       text-overflow: ellipsis;
 
-                      white-space: nowrap;"><%= user.fullname.split.first%><%total_secand=Time.now-(user.last_sign_out_at)%>
+                      white-space: nowrap;">
+                     <%if user.image.url(:thumb).present? %>
+                     <%= image_tag user.image.url(:thumb)%>
+                      <%else%>
+                      <%=image_tag 'pic.png', :class=>"img-circle",:alt=>"Cinque Terre",:width=>"30" ,:height=>"30" %>
+                      <%end%>&nbsp;&nbsp;&nbsp;
+                      <%= user.fullname.split.first%><%total_secand=Time.now-(user.last_sign_out_at)%>
                       <%seconds = total_secand % 60%>
                       <%hours=total_secand/(60 * 60)%>
                       <%minutes = ((total_secand / 60)%60) %>
                       <p> Last seen &nbsp;<%=format("%02d", hours)%>h
                       <%=format("%02d", minutes)%>m
                        <%=format("%02d", seconds)%>s ago</p>
-                    
-                      
                      </a>
                     <% end %>
                  <% end %>

@@ -37,16 +37,16 @@ Licensed under MIT
       <div class="profile-userpic">
         <!-- <img src="https://i.ytimg.com/vi/jJRj27LiqGo/maxresdefault.jpg" class="img-responsive" alt=""> -->
         <%if current_user.image.url(:thumb).present? %>
-        <%= image_tag current_user.image.url(:thumb), :class=>"img-circle",:alt=>"Cinque Terre" %>
+        <%= image_tag current_user.image.url(:thumb)%>
         <%else%>
-        hello
+       <%=image_tag 'pic.png', :class=>"img-circle",:alt=>"Cinque Terre",:width=>"50" ,:height=>"50" %>
         <%end%>
       </div>
       <!-- END SIDEBAR USERPIC -->
       <!-- SIDEBAR USER TITLE -->
       <div class="profile-usertitle">
         <div class="profile-usertitle-name">
-         @goFootball
+         <%= current_user.email%>
         </div>
         <!-- <div class="profile-usertitle-job">
           Developer
