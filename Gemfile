@@ -56,6 +56,10 @@ gem 'bootstrap-sass', '~> 3.3.6'
 gem 'carrierwave', '~> 1.0'
 gem "mini_magick"
 
+group :production do   
+    gem 'pg', '0.17.1'   
+    gem 'rails_12factor', '0.0.2’ 
+ end
 
 
 
