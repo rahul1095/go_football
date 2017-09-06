@@ -1,33 +1,4 @@
-<!-- <div class="row">
-  <div class="col-md-9">
-    <ul id="conversations-list">
-      <% @conversations.each do |conversation| %>
-        <%= render 'conversations/conversation', conversation: conversation, user: current_user %>
-      <% end %>
-    </ul>
-  </div>
-
-  <div class="col-md-3">
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        <h3 class="panel-title">User list</h3>
-      </div>
-      <div class="panel-body">
-        <ul>
-          <% @users.each do |user| %>
-           <li><%= link_to user.email, conversations_path(user_id: user), remote: true, method: :post %></li>
-          <% end %>
-        </ul>
-      </div>
-    </div>
-  </div>
-</div> -->
-
-<!--
-User Profile Sidebar by @keenthemes
-A component of Metronic Theme - #1 Selling Bootstrap 3 Admin Theme in Themeforest: http://j.mp/metronictheme
-Licensed under MIT
--->
+<h4><center>My Profile</center></h4>
 
 <div class="container">
 <div class="row profile">
@@ -52,20 +23,12 @@ Licensed under MIT
           Developer
         </div> -->
       </div>
-      <!-- END SIDEBAR USER TITLE -->
-      <!-- SIDEBAR BUTTONS -->
-      <!-- <div class="profile-userbuttons">
-        <button type="button" class="btn btn-success btn-sm">Follow</button>
-        <button type="button" class="btn btn-danger btn-sm">Message</button>
-      </div> -->
-      <!-- END SIDEBAR BUTTONS -->
-      <!-- SIDEBAR MENU -->
-      <div class="profile-usermenu">
+
+<div class="profile-usermenu">
         <ul class="nav">
           <li class="active">
-             <!-- <a href=" /show/#{@user.id}"> 
- -->
-           <%=link_to 'my Profile', "/show/#{@current_user.id}"   %>
+           <!--  <a href=" /users/profile"> -->
+           <%=link_to 'my Profile',profile_path(:id=>current_user.id)%>
             <!-- <i class="glyphicon glyphicon-home"></i> -->
            </a>
           </li>
@@ -91,50 +54,128 @@ Licensed under MIT
           </li>
           <li>
             <a href="#">
-            <button type="button" class="btn btn-success btn-sm">Unverfied</button>
+            <button type="button" class="btn btn-success btn-sm">verfied</button>
             <!-- <i class="glyphicon glyphicon-flag"></i> -->
             </a>
           </li>
         </ul>
       </div>
       <!-- END MENU -->
-    </div>
-  </div>
-  <div class="col-md-9">
-        <div class="profile-content">
-       Some user related content goes here...
-       <!-- <ul id="conversations-list">
-      <% @conversations.each do |conversation| %>
-
-        <%= render 'conversations/conversation', conversation: conversation, user: current_user %>
-      <% end %>
-    </ul>
-  </div>
-
-  <div class="col-md-3">
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        <h3 class="panel-title">chat</h3>
-      </div>
-      <div class="panel-body">
-        <ul>
-          <% @users.each do |user| %>
-           <li><%= link_to user.username, conversations_path(user_id: user), remote: true, method: :post %></li>
-          <% end %>
-        </ul> -->
-      </div>
-    </div>
-        </div>
-  </div>
+   </div>
+   </div>
+<div class="col-md-6">
+<div class="row">
+<div class=col-md-5><h5>about me</h5><%#=@user.about_us%></div>
+<div class=col-md-2><%=link_to 'edit','#'%></div>
 </div>
+
+<%= best_in_place @user, :about_us, :as => :textarea %>
+
+
+<div class="row">
+<div class=col-md-5><h5>my age:</h5><%= best_in_place @user, :age, :as => :input %></div>
+<div class=col-md-2><%=link_to 'edit','#'%></div>
 </div>
+
+
+<div class="row">
+<div class=col-md-5><h5>country</h5></div>
+<div class=col-md-2><%=link_to 'edit','#'%></div>
+</div>
+
+
+<div class="row">
+<div class=col-md-5><h5>city/town</h5><%= best_in_place @user, :city_town, :as => :input %></div>
+<div class=col-md-2><%=link_to 'edit','#'%></div>
+</div>
+
+
+<div class="row">
+<div class=col-md-5><h5>resident address</h5><%= best_in_place @user, :country, :as => :input %></div>
+<div class=col-md-2><%=link_to 'edit','#'%></div>
+</div>
+
+<div class="row">
+<div class=col-md-5><h5>photos</h5><%= best_in_place @user, :phone_number, :as => :input %>
+</div>
+<div class=col-md-2><%=link_to 'edit','#'%></div>
+</div>
+
+<div class="row">
+<div class=col-md-5><h5>education background</h5></div>
+<div class=col-md-2><%=link_to 'edit','#'%></div>
+</div>
+
+<div class="row">
+<div class=col-md-5><h5>current previous team(s)</h5></div>
+<div class=col-md-2><%=link_to 'edit','#'%></div>
+</div>
+
+<div class="row">
+<div class=col-md-5><h5>my favorate leagues/team(s)</h5></div>
+<div class=col-md-2><%=link_to 'edit','#'%></div>
+</div>
+
+<div class="row">
+<div class=col-md-5><h5>my favorate role model(s)</h5></div>
+
+</div>
+
+<div class="row">
+<div class=col-md-5><h5>my favorie football coach(es)</h5></div>
+
+</div>
+
+<div class="row">
+<div class=col-md-5><h5>my football possition</h5></div>
+<div class=col-md-2><%=link_to 'edit','#'%></div>
+</div><br/>
+<h4><center>Social link</center></h4>
+
+<div class="row">
+<div class=col-md-5><h5>facebook</h5></div>
+<div class=col-md-2><%=link_to 'edit','#'%></div>
+</div>
+
+<div class="row">
+<div class=col-md-5><h5>twiter</h5></div>
+<div class=col-md-2><%=link_to 'edit','#'%></div>
+</div>
+
+<div class="row">
+<div class=col-md-5><h5>instagram</h5></div>
+<div class=col-md-2><%=link_to 'edit','#'%></div>
+</div>
+   </div>
+   </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <style type="text/css">
-  /***
-User Profile Sidebar by @keenthemes
-A component of Metronic Theme - #1 Selling Bootstrap 3 Admin Theme in Themeforest: http://j.mp/metronictheme
-Licensed under MIT
-***/
 
 body {
   background: #F1F3FA;
@@ -243,10 +284,16 @@ body {
   background: #fff;
   min-height: 460px;
 }
+
+	h4
+	{
+		color: green;
+	}
+	h5
+	{
+		color: green;
+	}
 </style>
-
-
-
 
 <script type="text/javascript">
   $(document).ready(function() {
@@ -257,8 +304,3 @@ body {
    });
  });
 </script>
-
-<style type="text/css">
-.panel-body
-{height:300px;overflow:auto;}
-</style>

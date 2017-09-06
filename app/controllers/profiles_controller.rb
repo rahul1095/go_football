@@ -1,34 +1,22 @@
 
-class UsersController < ApplicationController
+class ProfilesController < ApplicationController
   
     # authorize! :delete, @user
-    respond_to :html, :json, :pdf
+    respond_to :html, :json
 
     def show
      @user = User.find(params[:id])
-     
-      # format.pdf do
-      #   render pdf: "export.pdf"   # Excluding ".pdf" extension.
-      # end
    end
-
-   def export
-      # @user = User.find(params[:id])
-        render pdf: "export.pdf.erb"   # Excluding ".pdf" extension.
-      
-      end
    
-
-
    def edit
      @user = User.find(params[:id])
    end
 
-		def update
+    def update
 
-		  @user = User.find params[:id]
-		  @user.update_attributes(message_params)
-		  respond_with @user
+      @user = User.find params[:id]
+      @user.update_attributes(message_params)
+      respond_with @user
   
     #   format.html { redirect_to(@user, :notice => 'User was successfully updated.') }
     #   format.json { respond_with_bip(@user) }
